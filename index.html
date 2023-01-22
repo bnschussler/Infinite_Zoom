@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+      <div class="row">
+         <canvas class="canvas" id="canvas" width="512" height="512"></canvas> 
+         <div class="row interactive">
+            <div class="column">
+               <h2>Zoom</h2>
+                  <div class="option">
+                     <p>zoom:
+                        <input type="text" id="zt" value="20" class="break small" oninput="zoom=-this.value/400+1"/>
+                     </p>
+                     <input type="range" value="20" id="zs" min="-100" max="100" oninput="zoom=-this.value/400+1"/>
+                  </div>
+                  <div class="option">
+                     <p>rotation:
+                        <input type="text" id="rt" value="0" class="break small" oninput="rotation=this.value/400"/>
+                     </p>
+                     <input type="range" value="0" id="rs" min="-100" max="100" oninput="rotation=this.value/400"/>
+                  </div>
+            </div>
+            <div class="column">
+               <h2>Noise</h2>
+                  <div class="option">
+                     <p>intensity:
+                        <input type="text" id="it" value="1" class="break small" oninput="intensity=this.value"/>
+                     </p>
+                     <input type="range" value="1" id="is" min="0" max="10" oninput="intensity=this.value"/>
+                  </div>
+            </div>
+            <div class="column">
+               <h2>Colors</h2>
+                  <div class="option">
+                     <p>hue:
+                        <input type="text" id="ht" value="0" class="break small" oninput="updateFilter()"/>
+                     </p>
+                     <input type="range" value="0" id="hs" min="0" max="360" oninput="updateFilter()"/>
+                     <div class="option toggle">
+                        <label for="hueplay">
+                        <p class="break">▷
+                        <input type="checkbox" id="hueplay" oninput="hueOn=this.checked"/></p>
+                        </label>
+                     </div>
+                  </div>
+                  <div class="option">
+                     <p>saturation:
+                        <input type="text" id="st" value="100" class="break small" oninput="updateFilter()"/>
+                     </p>
+                     <input type="range" value="100" id="ss" min="0" max="360" oninput="updateFilter()"/>
+                  </div>
+                  <div class="option">
+                     <p>contrast:
+                        <input type="text" id="ct" value="100" class="break small" oninput="updateFilter()"/>
+                     </p>
+                     <input type="range" value="100" id="cs" min="0" max="100" oninput="updateFilter()"/>
+                  </div>
+            </div>
+         </div>
+      </div> 
+      <div class="row interactive">
+         <a href="https://bnschussler.github.io/Website/">More Stuff!</a>
+      </div>
+      <script src="inputHandling.js"></script>
+      <script src="funnyzoom.js"></script>
+   </body>
+</html>
