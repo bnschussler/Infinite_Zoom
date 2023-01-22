@@ -11,6 +11,9 @@ var rotation=0;
 var intensity=3;
 var hueOn=false;
 
+var run=false;
+
+
 var mouseX=0; //mouse position in canvas pixel coords
 var mouseY=0;
 var pmouseX=0;  //mouse canvas coords last frame
@@ -61,54 +64,55 @@ function mod(x,m){
 }
 
 function draw(){
-  if(hueOn){
-    document.getElementById("hs").value=(parseInt(document.getElementById("hs").value)+11)%360;
-    document.getElementById("ht").value=document.getElementById("hs").value;
-    updateFilter();
-  }
-
-  mouseX = clamp(Math.floor( (rawmx - bb.left) / bb.width * width ),0,width); //from https://stackoverflow.com/questions/72379573/get-canvas-pixel-position-from-mouse-coordinates
-  mouseY = clamp(Math.floor( (rawmy - bb.top) / bb.height * height ),0,height);
-
-  window.requestAnimationFrame(draw);
-  for(x=0;x<width;x++){
-    for(y=0;y<height;y++){
-      dataBuffer[4*(x+width*y)]=clamp(data[4*(x+width*y)]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10,0,255);
-      dataBuffer[4*(x+width*y)+1]=clamp(data[4*(x+width*y)+1]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10,0,255);
-      dataBuffer[4*(x+width*y)+2]=clamp(data[4*(x+width*y)+2]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10,0,255);
+  if(run){
+    if(hueOn){
+      document.getElementById("hs").value=(parseInt(document.getElementById("hs").value)+11)%360;
+      document.getElementById("ht").value=document.getElementById("hs").value;
+      updateFilter();
     }
-  }
-  for(x=0;x<width;x++){
-    for(y=0;y<height;y++){
-      tx=(x-mouseX)*zoom;
-      ty=(y-mouseY)*zoom;
-      temp=tx*Math.cos(rotation)-ty*Math.sin(rotation)+mouseX+Math.random()-.5;
-      ty=ty*Math.cos(rotation)+tx*Math.sin(rotation)+mouseY+Math.random()-.5;
-      tx=temp;
-      a=tx-Math.floor(tx);
-      b=ty-Math.floor(ty);
-      c=mod(Math.floor(tx),width);
-      c1=mod(Math.floor(tx+1),width);
-      d=mod(Math.floor(ty),height);
-      d1=mod(Math.floor(ty+1),height);
-      data[4*(x+width*y)]=dataBuffer[4*(c+width*d)]*(1-a)*(1-b)
-                         +dataBuffer[4*(c1+width*d)]*(a)*(1-b)
-                         +dataBuffer[4*(c+width*d1)]*(1-a)*(b)
-                         +dataBuffer[4*(c1+width*d1)]*(a)*(b);
-      data[4*(x+width*y)+1]=dataBuffer[4*(c+width*d)+1]*(1-a)*(1-b)
-                           +dataBuffer[4*(c1+width*d)+1]*(a)*(1-b)
-                           +dataBuffer[4*(c+width*d1)+1]*(1-a)*(b)
-                           +dataBuffer[4*(c1+width*d1)+1]*(a)*(b);
-      data[4*(x+width*y)+2]=dataBuffer[4*(c+width*d)+2]*(1-a)*(1-b)
-                           +dataBuffer[4*(c1+width*d)+2]*(a)*(1-b)
-                           +dataBuffer[4*(c+width*d1)+2]*(1-a)*(b)
-                           +dataBuffer[4*(c1+width*d1)+2]*(a)*(b);
-    }
-  }
-  ctx.putImageData(imageData, 0, 0);
-  pmouseX=mouseX;
-  pmouseY=mouseY;
 
+    mouseX = clamp(Math.floor( (rawmx - bb.left) / bb.width * width ),0,width); //from https://stackoverflow.com/questions/72379573/get-canvas-pixel-position-from-mouse-coordinates
+    mouseY = clamp(Math.floor( (rawmy - bb.top) / bb.height * height ),0,height);
+
+    window.requestAnimationFrame(draw);
+    for(x=0;x<width;x++){
+      for(y=0;y<height;y++){
+        dataBuffer[4*(x+width*y)]=clamp(data[4*(x+width*y)]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10,0,255);
+        dataBuffer[4*(x+width*y)+1]=clamp(data[4*(x+width*y)+1]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10,0,255);
+        dataBuffer[4*(x+width*y)+2]=clamp(data[4*(x+width*y)+2]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10,0,255);
+      }
+    }
+    for(x=0;x<width;x++){
+      for(y=0;y<height;y++){
+        tx=(x-mouseX)*zoom;
+        ty=(y-mouseY)*zoom;
+        temp=tx*Math.cos(rotation)-ty*Math.sin(rotation)+mouseX+Math.random()-.5;
+        ty=ty*Math.cos(rotation)+tx*Math.sin(rotation)+mouseY+Math.random()-.5;
+        tx=temp;
+        a=tx-Math.floor(tx);
+        b=ty-Math.floor(ty);
+        c=mod(Math.floor(tx),width);
+        c1=mod(Math.floor(tx+1),width);
+        d=mod(Math.floor(ty),height);
+        d1=mod(Math.floor(ty+1),height);
+        data[4*(x+width*y)]=dataBuffer[4*(c+width*d)]*(1-a)*(1-b)
+                           +dataBuffer[4*(c1+width*d)]*(a)*(1-b)
+                           +dataBuffer[4*(c+width*d1)]*(1-a)*(b)
+                           +dataBuffer[4*(c1+width*d1)]*(a)*(b);
+        data[4*(x+width*y)+1]=dataBuffer[4*(c+width*d)+1]*(1-a)*(1-b)
+                             +dataBuffer[4*(c1+width*d)+1]*(a)*(1-b)
+                             +dataBuffer[4*(c+width*d1)+1]*(1-a)*(b)
+                             +dataBuffer[4*(c1+width*d1)+1]*(a)*(b);
+        data[4*(x+width*y)+2]=dataBuffer[4*(c+width*d)+2]*(1-a)*(1-b)
+                             +dataBuffer[4*(c1+width*d)+2]*(a)*(1-b)
+                             +dataBuffer[4*(c+width*d1)+2]*(1-a)*(b)
+                             +dataBuffer[4*(c1+width*d1)+2]*(a)*(b);
+      }
+    }
+    ctx.putImageData(imageData, 0, 0);
+    pmouseX=mouseX;
+    pmouseY=mouseY;
+  }
 }
 
-draw();
+draw() 
