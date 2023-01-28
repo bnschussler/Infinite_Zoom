@@ -31,17 +31,17 @@
                   <div class="options">
                      <div class="option">
                         <p>zoom:
-                           <input type="text" id="zt" value="1" class="break small" oninput="if(!isNaN(this.value)){zoom=this.value}"/>
+                           <input type="text" id="zt" value="1" class="break small" oninput="if(!isNaN(this.value)){zoom=+this.value}"/>
                            s<sup>-1</sup>
                         </p>
-                        <input type="range" value="1" id="zs" min="-5" max="5" step=".05" oninput="if(!isNaN(this.value)){zoom=this.value}"/>
+                        <input type="range" value="1" id="zs" min="-5" max="5" step=".05" oninput="if(!isNaN(this.value)){zoom=+this.value}"/>
                      </div>
                      <div class="option">
                         <p>rotation:
-                           <input type="text" id="rt" value="0" class="break small" oninput="if(!isNaN(this.value)){rotation=this.value}"/>
+                           <input type="text" id="rt" value="0" class="break small" oninput="if(!isNaN(this.value)){rotation=+this.value}"/>
                            rad/s
                         </p>
-                        <input type="range" value="0" id="rs" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){rotation=this.value}"/>
+                        <input type="range" value="0" id="rs" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){rotation=+this.value}"/>
                      </div>
                   </div>
                </div>
@@ -119,33 +119,33 @@
                   <div class="options">
                      <div class="option">
                         <p>noise:
-                           <input type="text" id="it" value="3" class="break small" oninput="if(!isNaN(this.value)){intensity=this.value}"/>
+                           <input type="text" id="it" value="3" class="break small" oninput="if(!isNaN(this.value)){intensity=+this.value}"/>
                         </p>
-                        <input type="range" value="3" id="is" min="0" max="10" oninput="if(!isNaN(this.value)){intensity=this.value}"/>
+                        <input type="range" value="3" id="is" min="0" max="10" oninput="if(!isNaN(this.value)){intensity=+this.value}"/>
                      </div>
                      <div class="option">
                         <p>??:
-                           <input type="text" id="z1t" value="0" class="break small" oninput="if(!isNaN(this.value)){zoom1=this.value}"/>
+                           <input type="text" id="z1t" value="0" class="break small" oninput="if(!isNaN(this.value)){zoom1=+this.value}"/>
                         </p>
-                        <input type="range" value="0" id="z1s" min="-5" max="5" step=".05" oninput="if(!isNaN(this.value)){zoom1=this.value}"/>
+                        <input type="range" value="0" id="z1s" min="-5" max="5" step=".05" oninput="if(!isNaN(this.value)){zoom1=+this.value}"/>
                      </div>
                      <div class="option">
                         <p>???:
-                           <input type="text" id="r1t" value="0" class="break small" oninput="if(!isNaN(this.value)){rotation1=this.value}"/>
+                           <input type="text" id="r1t" value="0" class="break small" oninput="if(!isNaN(this.value)){rotation1=+this.value}"/>
                         </p>
-                        <input type="range" value="0" id="r1s" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){rotation1=this.value}"/>
+                        <input type="range" value="0" id="r1s" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){rotation1=+this.value}"/>
                      </div>
                      <div class="option">
                         <p>~~wiggle~~:
-                           <input type="text" id="wt" value="0" class="break small" oninput="if(!isNaN(this.value)){wiggle=this.value}"/>
+                           <input type="text" id="wt" value="0" class="break small" oninput="if(!isNaN(this.value)){wiggle=+this.value}"/>
                         </p>
-                        <input type="range" value="0" id="ws" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){wiggle=this.value}"/>
+                        <input type="range" value="0" id="ws" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){wiggle=+this.value}"/>
                      </div>
                      <div class="option">
                         <p>wiggle... 2?:
-                           <input type="text" id="w1t" value="0" class="break small" oninput="if(!isNaN(this.value)){wiggle1=this.value}"/>
+                           <input type="text" id="w1t" value="0" class="break small" oninput="if(!isNaN(this.value)){wiggle1=+this.value}"/>
                         </p>
-                        <input type="range" value="0" id="w1s" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){wiggle1=this.value}"/>
+                        <input type="range" value="0" id="w1s" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){wiggle1=+this.value}"/>
                      </div>
                   </div>
                </div>

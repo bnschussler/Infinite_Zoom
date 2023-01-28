@@ -131,8 +131,6 @@ function draw(){
     mouseX = clamp(Math.floor( (rawmx - bb.left) / bb.width * width ),0,width); //from https://stackoverflow.com/questions/72379573/get-canvas-pixel-position-from-mouse-coordinates
     mouseY = clamp(Math.floor( (rawmy - bb.top) / bb.height * height ),0,height);
 
-    window.requestAnimationFrame(draw);
-
     for(x=0;x<width;x++){
       for(y=0;y<height;y++){
         dataBuffer1[3*(x+width*y)]=HSV?mod(Math.round(dataBuffer2[3*(x+width*y)]+(Math.floor(Math.random()*(intensity*2+1))-intensity)*10),255)
@@ -200,6 +198,8 @@ function draw(){
     updateImage();
     pmouseX=mouseX;
     pmouseY=mouseY;
+
+    window.requestAnimationFrame(draw);
   }
   else{
     dt=undefined;
