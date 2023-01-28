@@ -6,73 +6,154 @@
    <body>
       <div class="overlay" id="overlay">
          <p>EPILEPSY WARNING:</p>
-         <p>This project contains rapidly changing colors which may be harmful to photosensitive viewers.</p>
+         <p>This project contains rapidly changing colors which may be harmful to photosensetive viewers.</p>
          <button style="margin-left: 25vw; margin-right: 25vw; height: 100px; font-size: 80px" onclick="document.getElementById('overlay').style.display='none'">Continue</button>
       </div>
       <div class="row">
-         <canvas class="canvas" id="canvas" width="512" height="512"></canvas> 
-         <div class="row interactive">
+      <canvas class="canvas" id="canvas" width="512" height="512"></canvas>
+      <div class="column interactive">
             <div class="column">
-                  <div class="option toggle" style="border: 5px solid #fff000">
-                     <label for="run">
+               <div class="option toggle" style="border: 5px solid #fff000">
+                  <label for="run">
                      <p class="break" style="font-size: 30px">Play
-                     <input type="checkbox" id="run" onchange="run=this.checked; draw()" /></p>
-                     </label>
-                  </div>
-               <h2>Zoom</h2>
-                  <div class="option">
-                     <p>zoom:
-                        <input type="text" id="zt" value="20" class="break small" oninput="zoom=-this.value/400+1"/>
+                        <input type="checkbox" id="run" onchange="run=this.checked; draw()" />
                      </p>
-                     <input type="range" value="20" id="zs" min="-100" max="100" oninput="zoom=-this.value/400+1"/>
-                  </div>
-                  <div class="option">
-                     <p>rotation:
-                        <input type="text" id="rt" value="0" class="break small" oninput="rotation=this.value/400"/>
-                     </p>
-                     <input type="range" value="0" id="rs" min="-100" max="100" oninput="rotation=this.value/400"/>
-                  </div>
+                  </label>
+               </div>
             </div>
             <div class="column">
-               <h2>Noise</h2>
-                  <div class="option">
-                     <p>intensity:
-                        <input type="text" id="it" value="3" class="break small" oninput="intensity=this.value"/>
-                     </p>
-                     <input type="range" value="3" id="is" min="0" max="10" oninput="intensity=this.value"/>
+               <h2>Options:</h2>
+               <div class="row">
+               <div class="dropdown column">
+                  <label for="zoom" class="toggle">
+                     <h2>Zoom <input type="checkbox" id="zoom" name="zoom" value=""></h2>
+                  </label>
+                  <div class="options">
+                     <div class="option">
+                        <p>zoom:
+                           <input type="text" id="zt" value="1" class="break small" oninput="if(!isNaN(this.value)){zoom=this.value}"/>
+                           s<sup>-1</sup>
+                        </p>
+                        <input type="range" value="1" id="zs" min="-5" max="5" step=".05" oninput="if(!isNaN(this.value)){zoom=this.value}"/>
+                     </div>
+                     <div class="option">
+                        <p>rotation:
+                           <input type="text" id="rt" value="0" class="break small" oninput="if(!isNaN(this.value)){rotation=this.value}"/>
+                           rad/s
+                        </p>
+                        <input type="range" value="0" id="rs" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){rotation=this.value}"/>
+                     </div>
                   </div>
-            </div>
-            <div class="column">
-               <h2>Colors</h2>
-                  <div class="option">
-                     <p>hue:
-                        <input type="text" id="ht" value="0" class="break small" oninput="updateFilter()"/>
-                     </p>
-                     <input type="range" value="0" id="hs" min="0" max="360" oninput="updateFilter()"/>
+               </div>
+               <div class="dropdown column">
+                  <label for="Color" class="toggle">
+                     <h2>Colors <input type="checkbox" id="Color" name="Color" value=""></h2>
+                  </label>
+                  <div class="options">
                      <div class="option toggle">
-                        <label for="hueplay">
-                        <p class="break">▷
-                        <input type="checkbox" id="hueplay" oninput="hueOn=this.checked"/></p>
+                        <label for="HSV">
+                           <p class="break">HSV
+                              <input type="checkbox" id="HSV" oninput="HSV=this.checked; updateImage()"/>
+                           </p>
+                        </label>
+                     </div>
+                     <div class="option toggle">
+                        <label for="Red">
+                           <p class="break">Red/Hue Channel
+                              <input type="checkbox" id="Red" oninput="Red=this.checked; updateImage()" checked/>
+                           </p>
+                        </label>
+                     </div>
+                     <div class="option toggle">
+                        <label for="Green">
+                           <p class="break">Green/Sat. Channel
+                              <input type="checkbox" id="Green" oninput="Green=this.checked; updateImage()" checked/>
+                           </p>
+                        </label>
+                     </div>
+                     <div class="option toggle">
+                        <label for="Blue">
+                           <p class="break">Blue/Value Channel
+                              <input type="checkbox" id="Blue" oninput="Blue=this.checked; updateImage()" checked/>
+                           </p>
                         </label>
                      </div>
                   </div>
-                  <div class="option">
-                     <p>saturation:
-                        <input type="text" id="st" value="100" class="break small" oninput="updateFilter()"/>
-                     </p>
-                     <input type="range" value="100" id="ss" min="0" max="360" oninput="updateFilter()"/>
+               </div>
+               <div class="dropdown column">
+                  <label for="filter" class="toggle">
+                     <h2>Filters<input type="checkbox" id="filter" name="filter" value=""></h2>
+                  </label>
+                  <div class="options">
+                     <div class="option">
+                        <p>hue:
+                           <input type="text" id="ht" value="0" class="break small" oninput="updateFilter()"/>
+                        </p>
+                        <input type="range" value="0" id="hs" min="0" max="360" oninput="updateFilter()"/>
+                        <div class="option toggle">
+                           <label for="hueplay">
+                              <p class="break">▷
+                                 <input type="checkbox" id="hueplay" oninput="hueOn=this.checked"/>
+                              </p>
+                           </label>
+                        </div>
+                     </div>
+                     <div class="option">
+                        <p>saturation:
+                           <input type="text" id="st" value="100" class="break small" oninput="updateFilter()"/>
+                        </p>
+                        <input type="range" value="100" id="ss" min="0" max="360" oninput="updateFilter()"/>
+                     </div>
+                     <div class="option">
+                        <p>contrast:
+                           <input type="text" id="ct" value="100" class="break small" oninput="updateFilter()"/>
+                        </p>
+                        <input type="range" value="100" id="cs" min="0" max="100" oninput="updateFilter()"/>
+                     </div>
                   </div>
-                  <div class="option">
-                     <p>contrast:
-                        <input type="text" id="ct" value="100" class="break small" oninput="updateFilter()"/>
-                     </p>
-                     <input type="range" value="100" id="cs" min="0" max="100" oninput="updateFilter()"/>
+               </div>
+               <div class="dropdown column">
+                  <label for="noise" class="toggle">
+                     <h2>Extra <input type="checkbox" id="noise" name="noise" value=""></h2>
+                  </label>
+                  <div class="options">
+                     <div class="option">
+                        <p>noise:
+                           <input type="text" id="it" value="3" class="break small" oninput="if(!isNaN(this.value)){intensity=this.value}"/>
+                        </p>
+                        <input type="range" value="3" id="is" min="0" max="10" oninput="if(!isNaN(this.value)){intensity=this.value}"/>
+                     </div>
+                     <div class="option">
+                        <p>??:
+                           <input type="text" id="z1t" value="0" class="break small" oninput="if(!isNaN(this.value)){zoom1=this.value}"/>
+                        </p>
+                        <input type="range" value="0" id="z1s" min="-5" max="5" step=".05" oninput="if(!isNaN(this.value)){zoom1=this.value}"/>
+                     </div>
+                     <div class="option">
+                        <p>???:
+                           <input type="text" id="r1t" value="0" class="break small" oninput="if(!isNaN(this.value)){rotation1=this.value}"/>
+                        </p>
+                        <input type="range" value="0" id="r1s" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){rotation1=this.value}"/>
+                     </div>
+                     <div class="option">
+                        <p>~~wiggle~~:
+                           <input type="text" id="wt" value="0" class="break small" oninput="if(!isNaN(this.value)){wiggle=this.value}"/>
+                        </p>
+                        <input type="range" value="0" id="ws" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){wiggle=this.value}"/>
+                     </div>
+                     <div class="option">
+                        <p>wiggle... 2?:
+                           <input type="text" id="w1t" value="0" class="break small" oninput="if(!isNaN(this.value)){wiggle1=this.value}"/>
+                        </p>
+                        <input type="range" value="0" id="w1s" min="-6" max="6" step=".05" oninput="if(!isNaN(this.value)){wiggle1=this.value}"/>
+                     </div>
                   </div>
+               </div>
             </div>
-         </div>
-      </div> 
+            </div>
       <div class="row interactive">
-         <a href="https://bnschussler.github.io/Website/">More Stuff!</a>
+         <a href="https://bnschussler.github.io/Website/">More stuff by me!</a>
+      </div>
       </div>
       <script src="inputHandling.js"></script>
       <script src="funnyzoom.js"></script>

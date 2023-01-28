@@ -1,6 +1,10 @@
 var linked=[
 ["zt","zs"],
 ["rt","rs"],
+["z1t","z1s"],
+["r1t","r1s"],
+["wt","ws"],
+["w1t","w1s"],
 ["it","is"],
 ["ht","hs"],
 ["st","ss"],
@@ -39,3 +43,4 @@ Array.from(document.getElementsByClassName('toggle')).forEach(toggle => {
   });
 });
 
+window.onresize = function(){bb = canvas.getBoundingClientRect();};
